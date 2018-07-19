@@ -5,13 +5,12 @@ import smtplib
 from email.mime.text import MIMEText
 from email.header import Header
 def inser_img(driver,filename):
-    base_path=os.path.dirname(__file__)
-    base_path=str(base_path)
-    base_path=base_path.replace('\\','/')
-    base=base_path.split('Website')[0]
-    print (base)
+    f_path = os.path.dirname(os.path.realpath(__file__))
+    log_path = os.path.join(os.path.dirname(f_path), "test_report","img/")
+    # 判断项目下是否有logs文件夹，没有就创建一个
+    if not os.path.exists(log_path): os.makedirs(log_path)
     now =time.strftime('%Y-%m-%d-%H-%M-%S')
-    inser_path=base+"/Website/test_report/screenshot/"+now+filename+'.jpg'
+    inser_path=log_path+now+filename+'.jpg'
     driver.get_screenshot_as_file(inser_path)
 
 def find_new_report(dir):
@@ -36,3 +35,7 @@ def send_report(report):
     smtp.sendmail('hjunping@126.com','275769643@qq.com',msg.as_string())
     smtp.quit()
     print ("email has send out")
+
+if __name__ == "__main__":
+    driver = webdriver.Firefox()
+    print(inser_img(driver))

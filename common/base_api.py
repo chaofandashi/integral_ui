@@ -6,6 +6,14 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from common.function import *
 class Base():
+    # ID = "id"
+    # XPATH = "xpath"
+    # LINK_TEXT = "link text"
+    # PARTIAL_LINK_TEXT = "partial link text"
+    # NAME = "name"
+    # TAG_NAME = "tag name"
+    # CLASS_NAME = "class name"
+    # CSS_SELECTOR = "css selector"
     def __init__(self,driver):
         self.driver=driver
         self.timeout=30
@@ -40,11 +48,11 @@ class Base():
         ele=self.findElement(loctor)
         ele.send_keys(text)
     # 点击事件
-    def click(self,loctor):
+    def to_click(self,loctor):
         ele=self.findElement(loctor)
         ele.click()
     # 清除事件
-    def clear(self,loctor):
+    def to_clear(self,loctor):
         ele=self.findElement(loctor)
         ele.clear()
     # 鼠标悬停事件
@@ -107,5 +115,6 @@ if __name__ == "__main__":
     # plun_loc = ("xpath", "//h3[text()='最新评论']")
     # base.js_focus(plun_loc)
     input_id=("link text","新闻")
-
-    print(base.click(input_id))
+    base.moveToElement(input_id)
+    inser_img(driver,'test')
+    base.to_click(input_id)
